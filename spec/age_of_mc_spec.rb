@@ -26,6 +26,42 @@ class MichailSogomonyan
 
     gem_list
   end
+
+  def teamleader?
+    Time.now >= Time.new(2015, 3, 30)
+  end
+
+  def first_rollback_at
+    Time.new(2015, 11, 12)
+  end
+
+  def barmen?
+    true
+  end
+
+  def duty_bachelor
+    true
+  end
+
+  def customer_cart_to_db
+    true
+  end
+
+  def a_lot_awesome_code
+    [true, true]
+  end
+
+  def best?
+    true
+  end
+
+  def tasks_count
+    300
+  end
+
+  def merged_pull_requests_count
+    2500
+  end
 end
 
 RSpec.describe MichailSogomonyan do
@@ -95,6 +131,54 @@ RSpec.describe MichailSogomonyan do
       end
 
       after { Timecop.return }
+    end
+
+    describe "stay tunde..." do
+      context "from 30/03/2015" do
+        before { Timecop.travel(Time.new(2015, 3, 30)) }
+
+        it { expect(michail).to be_teamleader }
+
+        after { Timecop.return }
+      end
+
+      context "when 12/11/2015" do
+        it "was his first rollback" do
+          expect(michail.first_rollback_at.to_i).to eq Time.new(2015, 11, 12).to_i
+        end
+      end
+
+      it "releases barmen project" do
+        expect(michail).to be_barmen
+      end
+
+      it "releases customer cart to db" do
+        expect(michail.customer_cart_to_db).to eq true
+      end
+
+      it "releases duty bachelor" do
+        expect(michail.duty_bachelor).to eq true
+      end
+
+      it "completes so much awesome code" do
+        expect(michail.a_lot_awesome_code).to eq [true, true]
+      end
+    end
+  end
+
+  describe "statistics" do
+    it "300 tasks count" do
+      expect(michail.tasks_count).to eq 300
+    end
+
+    it "2500 merged PR's" do
+      expect(michail.merged_pull_requests_count).to eq 2500
+    end
+  end
+
+  describe "Thank you!" do
+    it "best friend" do
+      expect(michail).to be_best
     end
   end
 end
