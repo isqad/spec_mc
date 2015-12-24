@@ -1,4 +1,5 @@
 require 'attr_extras'
+require 'timecop'
 require 'rspec'
 
 class MichailSogomonyan
@@ -8,7 +9,9 @@ class MichailSogomonyan
     %w(knife knocker)
   end
 
-
+  def gem_ninja?
+    Time.now.year == 2014
+  end
 end
 
 RSpec.describe MichailSogomonyan do
@@ -25,6 +28,18 @@ RSpec.describe MichailSogomonyan do
   describe "first projects" do
     it "are \"knife\" and \"knocker\"" do
       expect(michail.first_projects).to match_array ['knife', 'knocker']
+    end
+  end
+
+  describe "as blizko developer" do
+    context "when was 2014" do
+      before { Timecop.travel(Time.new(2014, 1, 1)) }
+
+      it "became gem ninja!" do
+        expect(michail).to be_gem_ninja
+      end
+
+      after { Timecop.return }
     end
   end
 end
