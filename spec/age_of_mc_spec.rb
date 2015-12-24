@@ -1,15 +1,14 @@
+require 'attr_extras'
 require 'rspec'
 
 class MichailSogomonyan
-  attr_reader :start_date
-
-  def initialize(start_date)
-    @start_date = start_date
-  end
+  rattr_initialize :start_date
 
   def first_projects
     %w(knife knocker)
   end
+
+
 end
 
 RSpec.describe MichailSogomonyan do
